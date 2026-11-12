@@ -1,12 +1,12 @@
 # Server Maintenance Board
 
-A small, local maintenance planner for the recurring work that keeps a server dependable: verifying backups, applying patches, renewing certificates, and reviewing service health. Each task has a priority, an optional due date, and a completion state. The portfolio includes a live React board for adding, filtering, completing, and removing tasks.
+I built this local board for the server chores that are easy to forget: checking backups, applying patches, renewing certificates, and reviewing services. Add a due date and priority, then mark each task done. My portfolio has a live board for managing the list.
 
-The API is written in C++17 and uses the standard library plus operating-system sockets. It does not need a database server or third-party packages. Tasks are stored in `tasks.db` beside the directory from which the server is launched, and survive server restarts.
+The backend is C++17 and uses the standard library and operating-system sockets. There are no extra packages or database to install. Tasks are saved in `tasks.db` in the folder where you start the server, so they're still there after a restart.
 
 ## Build
 
-Install CMake and a C++17 compiler, then run these commands from this project directory:
+You'll need CMake and a C++17 compiler. From this folder, run:
 
 ```bash
 cmake -S . -B build
@@ -15,7 +15,7 @@ cmake --build build --config Release
 
 ## Run
 
-On Windows, start the API from this project directory in PowerShell:
+On Windows, start the API from PowerShell:
 
 ```powershell
 .\build\Release\task-api-server.exe
@@ -27,7 +27,7 @@ On Linux or macOS:
 ./build/task-api-server
 ```
 
-The API listens on `127.0.0.1:8080`. Open the Server Maintenance Board project in the portfolio while the API is running. The built-in CORS allowlist includes portfolio origins on ports `3000`, `3001`, and `3030` using either `localhost` or `127.0.0.1`.
+The API listens at `127.0.0.1:8080`. Leave it running, then open Server Maintenance Board in my portfolio. The built-in browser allowlist covers local portfolio addresses on ports `3000`, `3001`, and `3030`.
 
 Options:
 
@@ -44,7 +44,7 @@ For example, to keep the data file in a dedicated directory:
 ./build/task-api-server --data-file ./data/server-maintenance.db
 ```
 
-The parent directory is created if needed. Back up the data file with the server stopped. If the file exists but cannot be read or contains invalid data, the server reports an error and exits rather than silently starting with an empty board.
+The server creates the parent folder if needed. Stop the server before backing up the data file. If it finds a damaged or unreadable file, it tells you and stops instead of quietly starting with an empty list.
 
 ## Use the API
 
@@ -56,7 +56,7 @@ The parent directory is created if needed. Back up the data file with the server
 | `PATCH` | `/api/tasks/{id}` | Change task completion |
 | `DELETE` | `/api/tasks/{id}` | Remove a task |
 
-Create a task with a title, optional ISO due date, and one of three priorities:
+Add a task with a title, optional due date, and priority:
 
 ```bash
 curl http://127.0.0.1:8080/health
@@ -66,7 +66,7 @@ curl -X POST http://127.0.0.1:8080/api/tasks \
 curl http://127.0.0.1:8080/api/tasks
 ```
 
-`dueDate` may be an empty string or omitted. Non-empty dates must be real `YYYY-MM-DD` dates. `priority` may be `low`, `normal`, or `high`; it defaults to `normal`. Titles are trimmed, limited to 1–160 bytes, and cannot contain control characters. The board supports up to 200 tasks.
+You can leave `dueDate` blank or omit it. Dates use `YYYY-MM-DD` and must be real calendar dates. Priorities are `low`, `normal`, or `high`; the default is `normal`. Titles are trimmed, limited to 160 bytes, and can't contain control characters. The board holds up to 200 tasks.
 
 Complete and remove a task:
 
@@ -77,14 +77,14 @@ curl -X PATCH http://127.0.0.1:8080/api/tasks/1 \
 curl -X DELETE http://127.0.0.1:8080/api/tasks/1
 ```
 
-Successful changes are written to a temporary file and then replace `tasks.db`, so an incomplete write does not leave a partially written task list. If saving fails, the API reports an error and keeps the in-memory task list unchanged.
+After a change, the API writes a temporary file and then replaces `tasks.db`. If saving fails, it reports the problem and keeps the current list unchanged.
 
 ## Local-only behavior
 
-The server binds only to the loopback interface and checks the `Host` header and browser `Origin`. Add only exact origins you control, for example:
+The server only listens on this computer and checks the `Host` header and browser `Origin`. To allow another local app, add its exact address:
 
 ```bash
 ./build/task-api-server --cors-origin http://localhost:4567
 ```
 
-These checks are not user authentication. Do not bind the API to a public interface or expose it through a network proxy. The task file is plain local data and should be protected using normal operating-system file permissions. The portfolio's browser demo uses HTTP, so an HTTPS-hosted portfolio needs a trusted HTTPS proxy to avoid mixed-content browser blocks.
+These checks aren't a login system. Don't expose the API through a public network or proxy. The task file is plain text, so keep it somewhere with the right file permissions. If you host the portfolio over HTTPS, you'll need a trusted HTTPS proxy for the local API.

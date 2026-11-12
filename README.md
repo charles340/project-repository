@@ -1,6 +1,6 @@
 # Workspace
 
-A React and Next.js portfolio for browsing and opening projects in one place. The gallery includes a DevOps dashboard, an interactive calendar, SJIWP, JavaScript utilities, a C data-structures lab, a server automation toolkit, and a C++ server-maintenance board.
+This is my React and Next.js portfolio, where I share the projects I've built and open them in one place. It includes a DevOps dashboard, an interactive calendar, SJIWP, JavaScript utilities, a C data-structures lab, a server automation toolkit, and a C++ server-maintenance board.
 
 ## Run locally
 

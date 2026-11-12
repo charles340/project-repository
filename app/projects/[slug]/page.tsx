@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import ProjectMonitor from "@/app/project-monitor";
 import ProjectFrame from "@/app/project-frame";
 import TaskApiDemo from "@/app/task-api-demo";
+import CDataStructuresDemo from "@/app/c-data-structures-demo";
 import { getProject, projects } from "@/app/project-data";
 
 type ProjectPageProps = {
@@ -31,6 +32,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   const isDevOpsProject = project.id === "devops-dashboard";
   const isCppTaskApi = project.id === "cpp-task-api";
+  const isCDataStructuresLab = project.id === "c-data-structures-lab";
 
   return (
     <div className="workspace">
@@ -138,6 +140,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
           {isDevOpsProject ? (
             <ProjectMonitor />
+          ) : isCDataStructuresLab ? (
+            <CDataStructuresDemo />
           ) : isCppTaskApi ? (
             <TaskApiDemo />
           ) : (

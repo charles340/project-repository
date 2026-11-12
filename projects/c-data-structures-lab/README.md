@@ -1,8 +1,8 @@
 # C Data Structures Lab
 
-I built this interactive lab to make three core C data structures easier to understand by using them. Add and remove values, watch the structure change, and see how the implementation uses memory.
+I made this little lab so I can try three common data structures and see what happens under the hood. Add or remove values, watch the layout change, and check how much memory the C server is using.
 
-The browser UI talks to a small C17 HTTP server. The server uses fixed arrays for a stack and circular queue, and `malloc`/`free` for a singly linked list. The code uses only the C standard library and operating-system sockets; no database or third-party runtime is needed.
+The browser UI talks to a small C17 server. It uses arrays for the stack and circular queue, and `malloc`/`free` for the linked list. You can build it with CMake; there are no extra libraries to install.
 
 ## What to try
 
@@ -12,18 +12,18 @@ The browser UI talks to a small C17 HTTP server. The server uses fixed arrays fo
 | Queue | Enqueue, dequeue, inspect front | First in, first out; a circular buffer reuses slots with modulo arithmetic. |
 | Linked list | Append, find, remove first match | Nodes point to the next node; removal frees the node's allocated memory. |
 
-Each structure holds up to 16 values. Values may contain 1–24 printable ASCII characters. The lab displays the current item count, storage estimate, and high-water mark. For the linked list it also tracks cumulative node allocations and frees. Reset the selected structure to start over.
+Each structure holds up to 16 values. Values can be 1-24 printable ASCII characters. The lab shows the item count, a storage estimate, and the most items you've had at once. For the linked list, it also counts how many nodes were allocated and freed. Reset a structure whenever you want a clean start.
 
 ## Build the C server
 
-Install CMake and a C17 compiler. Run these commands from this project directory:
+You'll need CMake and a C17 compiler. From this folder, run:
 
 ```bash
 cmake -S . -B build
 cmake --build build --config Release
 ```
 
-On Windows, run the server in PowerShell:
+On Windows, start the server from PowerShell:
 
 ```powershell
 .\build\Release\c-data-structures-lab.exe
@@ -35,13 +35,13 @@ On Linux or macOS:
 ./build/c-data-structures-lab
 ```
 
-The API listens on `127.0.0.1:8091` by default. Keep it running while using the UI.
+By default, the server listens at `127.0.0.1:8091`. Leave it running while you use the UI.
 
 ## Open the UI
 
-In the portfolio, open **C Data Structures Lab** after starting the C server. The portfolio serves the included `index.html`, CSS, and JavaScript for the project.
+Start the C server, then open **C Data Structures Lab** in my portfolio. The app serves this project's HTML, CSS, and JavaScript.
 
-To run this repository on its own, start a static file server in a second terminal from this project directory:
+To run it outside the portfolio, open a second terminal in this folder and start a small static file server:
 
 ```powershell
 py -m http.server 3000
@@ -51,7 +51,7 @@ py -m http.server 3000
 python3 -m http.server 3000
 ```
 
-Then open `http://localhost:3000`. The API allows this local origin by default. Opening `index.html` directly as a `file://` URL is not supported because browsers restrict requests from local files.
+Then visit `http://localhost:3000`. The C server already allows this local address. Don't open `index.html` directly as a `file://` URL; browsers block its API requests.
 
 ## API
 
@@ -70,16 +70,15 @@ curl -X POST http://127.0.0.1:8091/api/action \
   -d '{"structure":"stack","action":"push","value":"backup"}'
 ```
 
-Supported structure names are `stack`, `queue`, and `linked-list`. Every action requires `structure` and `action`; add and linked-list search/remove actions also require `value`. Invalid operations, empty reads, and full structures return a readable JSON error.
+Use `stack`, `queue`, or `linked-list` as the structure name. Each action needs a `structure` and `action`; adding values, or finding and removing list items, also needs a `value`. If an operation can't run, the API returns a short error message.
 
-## What the C code demonstrates
+## A few C ideas in the code
 
-- Fixed-size arrays and bounds checks for the stack
-- A circular queue that advances its head and tail with modulo arithmetic
-- A singly linked list with head and tail pointers
-- Dynamic node allocation, removal, reset, and `free`
-- `struct` and `enum` to organize state and operations
-- Bounded HTTP request parsing, JSON string escaping, and explicit error responses
-- CMake-based C17 builds on Windows, Linux, and macOS
+- The stack uses a fixed-size array and checks its limits.
+- The queue wraps around and reuses slots with modulo arithmetic.
+- The linked list connects nodes with pointers and frees them when they're removed.
+- `struct` and `enum` keep the data and operations organized.
+- The server reads small HTTP requests, escapes JSON strings, and reports errors.
+- CMake builds the same C17 project on Windows, Linux, and macOS.
 
-The server binds only to loopback and accepts browser requests only from its exact local-origin allowlist. These checks are not authentication; do not expose the server on a public interface. The lab keeps its structures in memory, so restarting the C server resets them. This is a learning project, not a production HTTP server.
+The server only listens on your computer and accepts browser requests from a short list of local addresses. That's not a login system, so don't expose it to the internet. Everything stays in memory; restarting the server clears the lab. This is a learning project, not a production web server.
