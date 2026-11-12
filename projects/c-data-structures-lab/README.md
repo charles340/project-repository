@@ -36,10 +36,11 @@ On Linux or macOS:
 ```
 
 By default, the server listens at `127.0.0.1:8091`. Leave it running while you use the UI.
+Idle client connections time out after five seconds, so an unused browser connection won't block the next request.
 
 ## Open the UI
 
-Start the C server, then open **C Data Structures Lab** in my portfolio. The app serves this project's HTML, CSS, and JavaScript.
+Start the C server, then open **C Data Structures Lab** in my portfolio to use the in-app playground. The **Open project in a new tab** link loads the standalone HTML, CSS, and JavaScript version.
 
 To run it outside the portfolio, open a second terminal in this folder and start a small static file server:
 

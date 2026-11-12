@@ -167,6 +167,7 @@ export default function CDataStructuresDemo() {
         setState(nextState);
         setStatus("online");
         setError("");
+        setMessage(nextState.message);
       })
       .catch((requestError: unknown) => {
         if (!active) return;
@@ -183,7 +184,9 @@ export default function CDataStructuresDemo() {
     return state.structure === "stack" ? [...state.items].reverse() : state.items;
   }, [state]);
 
-  async function runOperation(operation: Operation) {
+  async function runOperation(
+    operation: Pick<Operation, "action" | "needsValue">,
+  ) {
     const cleanValue = value.trim();
     if (
       operation.needsValue &&

@@ -73,6 +73,7 @@ export const projects = [
       "I built an interactive C lab to explore stacks, circular queues, and linked lists while watching how operations change memory.",
     tags: ["C17", "Data Structures", "CMake"],
     sourcePath: "c-data-structures-lab",
+    repoUrl: "https://github.com/charles340/c-data-structures-lab",
   },
   {
     id: "cpp-task-api",

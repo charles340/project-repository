@@ -19,6 +19,7 @@ typedef SOCKET Socket;
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
+#include <sys/time.h>
 #include <unistd.h>
 typedef int Socket;
 #endif
@@ -102,6 +103,19 @@ static void close_socket(Socket socket_value) {
   closesocket(socket_value);
 #else
   close(socket_value);
+#endif
+}
+
+static bool set_receive_timeout(Socket socket_value) {
+#ifdef _WIN32
+  const DWORD timeout_milliseconds = 5000;
+  return setsockopt(socket_value, SOL_SOCKET, SO_RCVTIMEO,
+                    (const char*)&timeout_milliseconds,
+                    sizeof(timeout_milliseconds)) == 0;
+#else
+  const struct timeval timeout = {5, 0};
+  return setsockopt(socket_value, SOL_SOCKET, SO_RCVTIMEO, &timeout,
+                    sizeof(timeout)) == 0;
 #endif
 }
 
@@ -1241,6 +1255,11 @@ int main(int argc, char* argv[]) {
     if (client < 0) {
 #endif
       fprintf(stderr, "Could not accept a client connection.\n");
+      continue;
+    }
+    if (!set_receive_timeout(client)) {
+      fprintf(stderr, "Could not set a client receive timeout.\n");
+      close_socket(client);
       continue;
     }
     HttpRequest request;

@@ -146,7 +146,9 @@ export async function GET(_request: Request, { params }: ProjectSourceContext) {
     );
     headers.set(
       "Content-Security-Policy",
-      "sandbox allow-scripts allow-forms allow-popups",
+      project === "c-data-structures-lab"
+        ? "default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self' http://localhost:8091; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+        : "sandbox allow-scripts allow-forms allow-popups",
     );
   }
 
