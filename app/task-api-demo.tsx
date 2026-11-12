@@ -112,16 +112,17 @@ export default function TaskApiDemo() {
   const [dueDate, setDueDate] = useState("");
   const [priority, setPriority] = useState<TaskPriority>("normal");
   const [filter, setFilter] = useState<TaskFilter>("all");
+  const [today, setToday] = useState("");
   const [status, setStatus] = useState<"connecting" | "online" | "offline">(
     "connecting",
   );
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
-  const today = todayAsIsoDate();
 
   const refreshTasks = useCallback(async () => {
     try {
       setTasks(await loadTaskList());
+      setToday(todayAsIsoDate());
       setError("");
       setStatus("online");
     } catch (requestError) {
@@ -136,11 +137,13 @@ export default function TaskApiDemo() {
       .then((data) => {
         if (!active) return;
         setTasks(data);
+        setToday(todayAsIsoDate());
         setError("");
         setStatus("online");
       })
       .catch((requestError: unknown) => {
         if (!active) return;
+        setToday(todayAsIsoDate());
         setStatus("offline");
         setError(requestErrorMessage(requestError));
       });

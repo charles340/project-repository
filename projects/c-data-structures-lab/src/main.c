@@ -176,8 +176,10 @@ static bool parse_request_head(char* head, HttpRequest* request,
   char* line = line_end + 2;
   while (*line != '\0') {
     char* end = strstr(line, "\r\n");
+    char* next_line = NULL;
     if (end != NULL) {
       *end = '\0';
+      next_line = end + 2;
     } else {
       end = line + strlen(line);
     }
@@ -224,10 +226,10 @@ static bool parse_request_head(char* head, HttpRequest* request,
       has_origin = true;
     }
 
-    if (*end == '\0') {
+    if (next_line == NULL) {
       break;
     }
-    line = end + 2;
+    line = next_line;
   }
   return true;
 }

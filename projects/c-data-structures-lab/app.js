@@ -239,7 +239,7 @@ function renderStructureInfo(structure) {
     button.addEventListener("click", () => void runOperation(operation));
     elements.actionButtons.append(button);
   }
-  elements.valueHint.textContent = "1–24 printable ASCII characters";
+  elements.valueHint.textContent = "1-24 printable ASCII characters";
   updateDisabledControls();
 }
 
