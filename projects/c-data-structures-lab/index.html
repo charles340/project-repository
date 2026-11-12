@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f7f3">
+    <title>C Data Structures Lab</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <main class="lab-app">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="C Data Structures Lab home">
+          <span class="brand-mark">C</span>
+          <span>Systems Lab</span>
+        </a>
+        <span class="project-label">INTERACTIVE C PROJECT</span>
+      </header>
+
+      <section class="hero" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow"><span></span> C17 · POINTERS · MEMORY</p>
+          <h1 id="page-title">See the structure<br><em>behind the code.</em></h1>
+          <p class="intro">
+            I built this lab to let me try a stack, queue, and linked list,
+            then see how each one handles values and memory.
+          </p>
+        </div>
+        <div class="connection-status" id="connection-status" role="status">
+          <span></span>
+          <strong id="connection-label">Connecting to C server</strong>
+        </div>
+      </section>
+
+      <section class="connection-help" id="connection-help" hidden>
+        <div>
+          <strong>Start the C server to use the lab.</strong>
+          <p>Run these commands from the project folder, then try again.</p>
+          <code>cmake -S . -B build<br>cmake --build build --config Release<br>.\build\Release\c-data-structures-lab.exe</code>
+        </div>
+        <button id="retry-connection" type="button">Try again</button>
+      </section>
+
+      <section class="lab-grid" aria-label="Interactive data structures lab">
+        <aside class="lesson-card">
+          <p class="section-kicker">CHOOSE A STRUCTURE</p>
+          <label class="select-label" for="structure-select">Data structure</label>
+          <select id="structure-select">
+            <option value="stack">Stack</option>
+            <option value="queue">Queue</option>
+            <option value="linked-list">Linked list</option>
+          </select>
+
+          <div class="lesson-copy" id="lesson-copy">
+            <span class="lesson-type">LIFO · FIXED ARRAY</span>
+            <h2>Stack</h2>
+            <p>Last in, first out. Add to the top and remove from the same end.</p>
+          </div>
+
+          <div class="lesson-rule"></div>
+          <div class="lesson-fact">
+            <span>Typical operations</span>
+            <strong id="complexity-copy">Push and pop: O(1)</strong>
+          </div>
+          <div class="lesson-fact">
+            <span>How C stores it</span>
+            <strong id="memory-copy">A bounded array in a struct</strong>
+          </div>
+          <div class="lesson-tip">
+            <span aria-hidden="true">i</span>
+            <p id="lesson-tip">
+              The top is the last array item. Pushing grows the count; popping
+              shrinks it.
+            </p>
+          </div>
+        </aside>
+
+        <section class="workbench" aria-labelledby="workbench-title">
+          <div class="workbench-heading">
+            <div>
+              <p class="section-kicker">LIVE PLAYGROUND</p>
+              <h2 id="workbench-title">Your stack</h2>
+            </div>
+            <button class="reset-button" id="reset-structure" type="button">Reset</button>
+          </div>
+
+          <div class="metrics" aria-label="Structure statistics">
+            <div class="metric">
+              <span>Items</span>
+              <strong id="item-count">0</strong>
+            </div>
+            <div class="metric">
+              <span>Capacity</span>
+              <strong id="item-capacity">16</strong>
+            </div>
+            <div class="metric">
+              <span>Storage estimate</span>
+              <strong><span id="memory-bytes">0</span><small> bytes</small></strong>
+            </div>
+          </div>
+
+          <div class="memory-strip" id="memory-strip">
+            <span id="allocation-copy">Fixed storage is reserved in the C structure.</span>
+            <span id="high-water-copy">High-water mark: 0</span>
+          </div>
+
+          <form class="action-form" id="value-form">
+            <label for="value-input">Value <span id="value-hint">Up to 24 characters</span></label>
+            <div class="value-row">
+              <input id="value-input" maxlength="24" placeholder="e.g. backup" autocomplete="off">
+              <span class="input-counter" id="input-counter">0 / 24</span>
+            </div>
+            <div class="action-buttons" id="action-buttons"></div>
+          </form>
+
+          <p class="operation-message" id="operation-message" role="status" aria-live="polite">
+            Choose an operation to begin.
+          </p>
+
+          <div class="visual-heading">
+            <span>MEMORY VIEW</span>
+            <span id="visual-order">Bottom → top</span>
+          </div>
+          <div class="visualization visualization-stack" id="visualization" aria-live="polite">
+            <p class="empty-visual">Your structure is empty. Add a value to begin.</p>
+          </div>
+
+          <div class="list-memory" id="list-memory" hidden>
+            <span>Node allocations <strong id="allocation-count">0</strong></span>
+            <span>Nodes freed <strong id="free-count">0</strong></span>
+          </div>
+        </section>
+      </section>
+
+      <section class="activity-card" aria-labelledby="activity-title">
+        <div>
+          <p class="section-kicker">YOUR SESSION</p>
+          <h2 id="activity-title">Recent operations</h2>
+        </div>
+        <ol class="activity-list" id="activity-list">
+          <li>Operations will appear here as you explore.</li>
+        </ol>
+      </section>
+
+      <footer class="lab-footer">
+        <span>C17 · local C server · no data leaves this computer</span>
+        <span>Restarting the server clears this session.</span>
+      </footer>
+    </main>
+  </body>
+</html>

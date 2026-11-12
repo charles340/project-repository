@@ -336,6 +336,25 @@ function ProjectPreview({ projectId }: { projectId: (typeof projects)[number]["i
     );
   }
 
+  if (projectId === "c-data-structures-lab") {
+    return (
+      <div className="project-preview project-preview--c-data-structures-lab" aria-hidden="true">
+        <div className="preview-c-lab">
+          <div className="preview-c-lab-top"><span>C17 SYSTEMS LAB</span><i>●</i></div>
+          <div className="preview-c-lab-title">Circular queue</div>
+          <div className="preview-c-lab-nodes">
+            <b>FRONT <strong>alpha</strong></b>
+            <i>→</i>
+            <b><strong>bravo</strong></b>
+            <i>→</i>
+            <b>BACK <strong>charlie</strong></b>
+          </div>
+          <div className="preview-c-lab-footer">head + count · modulo · bounded storage</div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="project-preview project-preview--sjiwp" aria-hidden="true">
       <div className="preview-site">

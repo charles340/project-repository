@@ -7,6 +7,7 @@ const projectRoots: Record<string, string> = {
   "javascript-todo-list": resolve(process.cwd(), "projects", "javascript-todo-list"),
   "javascript-calculator": resolve(process.cwd(), "projects", "javascript-calculator"),
   "javascript-notes": resolve(process.cwd(), "projects", "javascript-notes"),
+  "c-data-structures-lab": resolve(process.cwd(), "projects", "c-data-structures-lab"),
   "server-automation-toolkit": resolve(process.cwd(), "projects", "server-automation-toolkit"),
 };
 

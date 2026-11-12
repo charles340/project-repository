@@ -40,6 +40,7 @@ export const projects = [
       "I designed this task planner with due dates, priorities, filters, and saved tasks.",
     tags: ["HTML", "CSS", "JavaScript"],
     sourcePath: "javascript-todo-list",
+    repoUrl: "https://github.com/charles340/javascript-todo-list",
   },
   {
     id: "javascript-calculator",
@@ -50,6 +51,7 @@ export const projects = [
       "I made a responsive calculator for the four basic operations, with keyboard support.",
     tags: ["HTML", "CSS", "JavaScript"],
     sourcePath: "javascript-calculator",
+    repoUrl: "https://github.com/charles340/javascript-calculator",
   },
   {
     id: "javascript-notes",
@@ -60,6 +62,17 @@ export const projects = [
       "I built a lightweight notes pad that saves my ideas in the browser.",
     tags: ["HTML", "CSS", "JavaScript"],
     sourcePath: "javascript-notes",
+    repoUrl: "https://github.com/charles340/javascript-notes",
+  },
+  {
+    id: "c-data-structures-lab",
+    title: "C Data Structures Lab",
+    kind: "Interactive C systems lab",
+    format: "Backend",
+    description:
+      "I built an interactive C lab to explore stacks, circular queues, and linked lists while watching how operations change memory.",
+    tags: ["C17", "Data Structures", "CMake"],
+    sourcePath: "c-data-structures-lab",
   },
   {
     id: "cpp-task-api",
@@ -70,6 +83,7 @@ export const projects = [
       "I built a local C++ API and task board to plan server upkeep with due dates, priorities, and persistent tracking.",
     tags: ["C++17", "CMake", "HTTP API"],
     sourcePath: null,
+    repoUrl: "https://github.com/charles340/cpp-server-maintenance-board",
   },
   {
     id: "server-automation-toolkit",
