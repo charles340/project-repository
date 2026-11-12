@@ -5,7 +5,7 @@ export const projects = [
     kind: "API health monitor",
     format: "React",
     description:
-      "A compact dashboard that checks the health of the local backend API.",
+      "I built a compact dashboard to check the health of a local backend API.",
     tags: ["Next.js", "React", "Node API"],
     sourcePath: null,
   },
@@ -15,7 +15,7 @@ export const projects = [
     kind: "Interactive calendar",
     format: "Web",
     description:
-      "A Croatian 2025 calendar with month navigation and important holidays.",
+      "I created a Croatian 2025 calendar with month navigation and important holidays.",
     tags: ["HTML", "CSS", "JavaScript"],
     sourcePath: "interactive_calendar_hr_2025",
     repoUrl: "https://github.com/charles340/interactive_calendar_hr_2025",
@@ -26,7 +26,7 @@ export const projects = [
     kind: "Personal website",
     format: "Web",
     description:
-      "A multi-page personal website with galleries, travel, food, and car pages.",
+      "I built this multi-page personal website with galleries, travel, food, and car pages.",
     tags: ["HTML", "CSS", "Multi-page"],
     sourcePath: "sjiwp",
     repoUrl: "https://github.com/charles340/sjiwp",
@@ -37,7 +37,7 @@ export const projects = [
     kind: "Task manager",
     format: "Web",
     description:
-      "A focused task workspace with due dates, priorities, filters, and saved tasks.",
+      "I designed this task planner with due dates, priorities, filters, and saved tasks.",
     tags: ["HTML", "CSS", "JavaScript"],
     sourcePath: "javascript-todo-list",
   },
@@ -47,7 +47,7 @@ export const projects = [
     kind: "Everyday calculator",
     format: "Web",
     description:
-      "A responsive calculator for the four basic operations, with keyboard support.",
+      "I made a responsive calculator for the four basic operations, with keyboard support.",
     tags: ["HTML", "CSS", "JavaScript"],
     sourcePath: "javascript-calculator",
   },
@@ -57,7 +57,7 @@ export const projects = [
     kind: "Quick notes",
     format: "Web",
     description:
-      "A lightweight notes pad that saves ideas in the browser as you work.",
+      "I built a lightweight notes pad that saves my ideas in the browser.",
     tags: ["HTML", "CSS", "JavaScript"],
     sourcePath: "javascript-notes",
   },
@@ -67,7 +67,7 @@ export const projects = [
     kind: "C++ maintenance API",
     format: "Backend",
     description:
-      "Plan server upkeep with due dates, priorities, and persistent task tracking.",
+      "I built a local C++ API and task board to plan server upkeep with due dates, priorities, and persistent tracking.",
     tags: ["C++17", "CMake", "HTTP API"],
     sourcePath: null,
   },
@@ -77,7 +77,7 @@ export const projects = [
     kind: "Bash & shell",
     format: "Shell",
     description:
-      "Practical Bash tools for server reports, service checks, and verified backups.",
+      "I assembled Bash tools for server reports, service checks, and verified backups.",
     tags: ["Bash", "Linux", "Automation"],
     sourcePath: "server-automation-toolkit",
     repoUrl: "https://github.com/charles340/server-automation",

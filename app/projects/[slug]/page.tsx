@@ -44,15 +44,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </span>
           <span>workspace</span>
         </Link>
-        <p className="workspace-label">Current workspace</p>
+        <p className="workspace-label">My workspace</p>
         <div className="workspace-switcher">
           <span className="workspace-avatar">P</span>
           <span>
-            <strong>Personal space</strong>
-            <small>Project collection</small>
+            <strong>My projects</strong>
+            <small>Designed and built by me</small>
           </span>
         </div>
-        <p className="sidebar-section-label">Workspace</p>
+        <p className="sidebar-section-label">My workspace</p>
         <nav className="sidebar-nav" aria-label="Workspace navigation">
           <Link className="sidebar-link" href="/#top">
             <svg viewBox="0 0 20 20" width="16" height="16" fill="none" aria-hidden="true">
@@ -72,8 +72,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </nav>
         <div className="sidebar-bottom">
           <div className="sidebar-note">
-            <strong>Everything in one place.</strong>
-            <p>Browse each project here without losing your way back to the collection.</p>
+            <strong>My work, all in one place.</strong>
+            <p>I built this collection so I can open each project here and return anytime.</p>
           </div>
         </div>
       </aside>
@@ -84,10 +84,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <svg viewBox="0 0 20 20" width="15" height="15" fill="none" aria-hidden="true">
               <path d="M15.5 10H4.5m0 0 4.2-4.2M4.5 10l4.2 4.2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            All projects
+            My projects
           </Link>
           <div className="breadcrumb">
-            Workspace <span aria-hidden="true">/</span> <strong>{project.title}</strong>
+            My workspace <span aria-hidden="true">/</span> <strong>{project.title}</strong>
           </div>
         </div>
 

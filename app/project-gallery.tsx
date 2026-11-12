@@ -47,16 +47,16 @@ export default function ProjectGallery() {
           <span>workspace</span>
         </Link>
 
-        <p className="workspace-label">Current workspace</p>
+        <p className="workspace-label">My workspace</p>
         <div className="workspace-switcher">
           <span className="workspace-avatar">P</span>
           <span>
-            <strong>Personal space</strong>
-            <small>Project collection</small>
+            <strong>My projects</strong>
+            <small>Designed and built by me</small>
           </span>
         </div>
 
-        <p className="sidebar-section-label">Workspace</p>
+        <p className="sidebar-section-label">My workspace</p>
         <nav className="sidebar-nav" aria-label="Workspace navigation">
           <Link className="sidebar-link" href="/#top">
             <svg viewBox="0 0 20 20" width="16" height="16" fill="none" aria-hidden="true">
@@ -82,8 +82,8 @@ export default function ProjectGallery() {
 
         <div className="sidebar-bottom">
           <div className="sidebar-note">
-            <strong>Everything in one place.</strong>
-            <p>Browse each project here without losing your way back to the collection.</p>
+            <strong>My work, all in one place.</strong>
+            <p>I built this collection so I can open each project here and return anytime.</p>
           </div>
         </div>
       </aside>
@@ -91,11 +91,11 @@ export default function ProjectGallery() {
       <main className="main-panel" id="top">
         <div className="topbar">
           <div className="breadcrumb">
-            Workspace <span aria-hidden="true">/</span> <strong>Projects</strong>
+            My workspace <span aria-hidden="true">/</span> <strong>Projects</strong>
           </div>
           <div className="collection-status">
             <span className="status-dot" aria-hidden="true" />
-            Personal collection
+            My collection
           </div>
         </div>
 
@@ -103,28 +103,28 @@ export default function ProjectGallery() {
           <div>
             <p className="eyebrow">
               <span className="eyebrow-mark" aria-hidden="true" />
-              A living portfolio
+              Projects I built
             </p>
             <h1 id="page-title">
-              <span>Every project,</span>
+              <span>My projects,</span>
               <br />
-              in its own place.
+              ready to explore.
             </h1>
             <p className="hero-copy">
-              A clear view of what you&apos;ve been building. Pick a project to
-              explore it right here.
+              I&apos;m the developer behind every project here. I built this
+              collection to share my work. Choose any project to open it in the app.
             </p>
           </div>
           <div className="hero-count" aria-label={`${projects.length} projects`}>
             <strong>{String(projects.length).padStart(2, "0")}</strong>
-            <span>projects in your workspace</span>
+            <span>projects I&apos;ve built</span>
           </div>
         </section>
 
         <section className="projects-section" id="projects" aria-labelledby="projects-heading">
           <div className="projects-toolbar">
             <h2 className="projects-heading" id="projects-heading">
-              All projects <span>{visibleProjects.length} shown</span>
+              My projects <span>{visibleProjects.length} shown</span>
             </h2>
             <div className="project-controls">
               <label className="search-field">
@@ -188,8 +188,8 @@ export default function ProjectGallery() {
 
             {visibleProjects.length === 0 && (
               <div className="empty-state">
-                <h3>No matching projects</h3>
-                <p>Try a different search or clear the current filter.</p>
+                <h3>No projects match that search</h3>
+                <p>Clear the filter to browse everything I&apos;ve built.</p>
                 <button
                   type="button"
                   onClick={() => {

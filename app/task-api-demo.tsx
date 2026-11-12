@@ -1,6 +1,12 @@
 "use client";
 
-import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
+import {
+  type FormEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
 type TaskPriority = "low" | "normal" | "high";
 type TaskFilter = "all" | "open" | "upcoming" | "overdue" | "done";
@@ -29,6 +35,7 @@ function isTask(value: unknown): value is Task {
   const task = value as Record<string, unknown>;
   return (
     Number.isInteger(task.id) &&
+    Number(task.id) > 0 &&
     typeof task.title === "string" &&
     typeof task.dueDate === "string" &&
     (task.priority === "low" ||
@@ -81,6 +88,24 @@ function dueDateLabel(task: Task, today: string) {
   return `Due ${displayDate(task.dueDate)}`;
 }
 
+async function loadTaskList(): Promise<Task[]> {
+  const response = await fetch(`${apiBase}/api/tasks`);
+  if (!response.ok) {
+    throw new Error(`The API returned ${response.status}.`);
+  }
+  const data: unknown = await response.json();
+  if (!Array.isArray(data) || !data.every(isTask)) {
+    throw new Error("The API returned an unexpected task list.");
+  }
+  return data;
+}
+
+function requestErrorMessage(requestError: unknown) {
+  return requestError instanceof Error
+    ? requestError.message
+    : "Could not reach the maintenance API.";
+}
+
 export default function TaskApiDemo() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [title, setTitle] = useState("");
@@ -95,32 +120,34 @@ export default function TaskApiDemo() {
   const today = todayAsIsoDate();
 
   const refreshTasks = useCallback(async () => {
-    setStatus("connecting");
     try {
-      const response = await fetch(`${apiBase}/api/tasks`);
-      if (!response.ok) {
-        throw new Error(`The API returned ${response.status}.`);
-      }
-      const data: unknown = await response.json();
-      if (!Array.isArray(data) || !data.every(isTask)) {
-        throw new Error("The API returned an unexpected task list.");
-      }
-      setTasks(data);
+      setTasks(await loadTaskList());
       setError("");
       setStatus("online");
     } catch (requestError) {
       setStatus("offline");
-      setError(
-        requestError instanceof Error
-          ? requestError.message
-          : "Could not reach the maintenance API.",
-      );
+      setError(requestErrorMessage(requestError));
     }
   }, []);
 
   useEffect(() => {
-    void refreshTasks();
-  }, [refreshTasks]);
+    let active = true;
+    loadTaskList()
+      .then((data) => {
+        if (!active) return;
+        setTasks(data);
+        setError("");
+        setStatus("online");
+      })
+      .catch((requestError: unknown) => {
+        if (!active) return;
+        setStatus("offline");
+        setError(requestErrorMessage(requestError));
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const visibleTasks = useMemo(
     () =>
@@ -169,11 +196,7 @@ export default function TaskApiDemo() {
       await refreshTasks();
       return true;
     } catch (requestError) {
-      setError(
-        requestError instanceof Error
-          ? requestError.message
-          : "The task could not be saved.",
-      );
+      setError(requestErrorMessage(requestError));
       return false;
     } finally {
       setBusy(false);
@@ -249,7 +272,13 @@ export default function TaskApiDemo() {
             Run these commands from the <code>cpp-task-api</code> project
             folder. Data is saved to <code>tasks.db</code> in that folder.
           </span>
-          <button type="button" onClick={() => void refreshTasks()}>
+          <button
+            type="button"
+            onClick={() => {
+              setStatus("connecting");
+              void refreshTasks();
+            }}
+          >
             Try again
           </button>
         </div>

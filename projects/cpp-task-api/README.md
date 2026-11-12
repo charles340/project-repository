@@ -66,7 +66,7 @@ curl -X POST http://127.0.0.1:8080/api/tasks \
 curl http://127.0.0.1:8080/api/tasks
 ```
 
-`dueDate` may be an empty string or omitted. Non-empty dates must be real `YYYY-MM-DD` dates. `priority` may be `low`, `normal`, or `high`; it defaults to `normal`. Titles are trimmed and limited to 1–160 bytes. The board supports up to 200 tasks.
+`dueDate` may be an empty string or omitted. Non-empty dates must be real `YYYY-MM-DD` dates. `priority` may be `low`, `normal`, or `high`; it defaults to `normal`. Titles are trimmed, limited to 1–160 bytes, and cannot contain control characters. The board supports up to 200 tasks.
 
 Complete and remove a task:
 
