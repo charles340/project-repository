@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f8f5">
+    <title>Quick Notes</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <main class="notes-app">
+      <header class="project-header">
+        <span class="brand"><span class="brand-mark">w</span> workspace</span>
+        <span class="project-label">QUICK NOTES</span>
+      </header>
+      <section class="notes-intro" aria-labelledby="notes-title">
+        <p class="eyebrow">A QUIET PLACE TO THINK</p>
+        <h1 id="notes-title">Keep the good<br><span>ideas close.</span></h1>
+        <p class="intro">Catch a thought before it wanders off.</p>
+      </section>
+
+      <form class="note-form" id="note-form">
+        <label class="sr-only" for="note-title">Note title</label>
+        <input id="note-title" name="title" type="text" maxlength="80" placeholder="Give this note a title">
+        <label class="sr-only" for="note-body">Write your note</label>
+        <textarea id="note-body" name="body" rows="4" maxlength="1200" placeholder="Start writing..." required></textarea>
+        <div class="form-footer">
+          <span id="character-count">0 / 1200</span>
+          <button type="submit">Save note <span aria-hidden="true">↗</span></button>
+        </div>
+      </form>
+
+      <p class="notice" id="notice" role="status" aria-live="polite"></p>
+
+      <section class="saved-notes" aria-labelledby="saved-heading">
+        <div class="section-heading">
+          <h2 id="saved-heading">Your notes</h2>
+          <span id="note-count">0 notes</span>
+        </div>
+        <div class="notes-grid" id="notes-grid"></div>
+        <div class="empty-notes" id="empty-notes">
+          <span aria-hidden="true">✳</span>
+          <p>Your next idea starts here.</p>
+          <small>Saved notes stay in this browser.</small>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

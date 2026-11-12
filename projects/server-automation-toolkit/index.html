@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f7f8f5">
+    <title>Server Automation Toolkit</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="toolkit">
+      <header class="project-header">
+        <span class="brand"><span class="brand-mark">w</span> workspace</span>
+        <a class="header-link" href="https://github.com/charles340/server-automation" target="_blank" rel="noreferrer">
+          Existing GitHub project <span aria-hidden="true">↗</span>
+        </a>
+      </header>
+
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> BASH &amp; SHELL TOOLKIT</p>
+          <h1 id="page-title">Less guesswork.<br><span>Calmer server days.</span></h1>
+          <p class="hero-description">A few practical Linux tools for checking a host, inspecting a service, and making a backup you can verify.</p>
+          <div class="hero-actions">
+            <a class="primary-link" href="#tools">Explore the tools <span aria-hidden="true">↓</span></a>
+            <a class="text-link" href="#safety">How safe runs work</a>
+          </div>
+          <ul class="hero-facts" aria-label="Toolkit highlights">
+            <li><strong>03</strong><span>focused scripts</span></li>
+            <li><strong>0</strong><span>extra packages</span></li>
+            <li><strong>Safe</strong><span>backup preview first</span></li>
+          </ul>
+        </div>
+
+        <div class="terminal" aria-label="Example server report output">
+          <div class="terminal-top">
+            <span class="terminal-lights" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span>read-only check</span>
+            <span class="terminal-status">READY</span>
+          </div>
+          <pre><span class="terminal-prompt">$</span> bash scripts/server-report.sh
+
+Server report
+Host: app-node-01
+Uptime: 12 days, 04:18
+
+Disk usage
+/dev/sda1       42% used
+
+Top processes by CPU
+... report complete</pre>
+          <p>Inspect system health without changing server state.</p>
+        </div>
+      </section>
+
+      <section class="safety-strip" id="safety" aria-label="Safety defaults">
+        <div><span class="safety-icon">01</span><p><strong>Read-only checks</strong><br>Reports and service status never restart or modify services.</p></div>
+        <div><span class="safety-icon">02</span><p><strong>Preview before backup</strong><br>Archive creation happens only when you pass <code>--execute</code>.</p></div>
+        <div><span class="safety-icon">03</span><p><strong>No automatic cleanup</strong><br>Existing backups are never removed or overwritten.</p></div>
+      </section>
+
+      <section class="tools" id="tools" aria-labelledby="tools-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">THE TOOLBOX</p>
+            <h2 id="tools-heading">Choose a task</h2>
+          </div>
+          <span class="platform-label">Designed for Linux</span>
+        </div>
+
+        <div class="tool-grid">
+          <article class="tool-card">
+            <div class="card-heading"><span class="tool-number">01</span><span class="tool-tag">READ ONLY</span></div>
+            <h3>Server report</h3>
+            <p>Get a quick snapshot of the host, uptime, disk space, memory, and busiest processes.</p>
+            <div class="command-block">
+              <span>Run from the project folder</span>
+              <code>bash scripts/server-report.sh</code>
+            </div>
+            <a class="script-link" href="scripts/server-report.sh" target="_blank" rel="noreferrer">Inspect script <span aria-hidden="true">↗</span></a>
+          </article>
+
+          <article class="tool-card">
+            <div class="card-heading"><span class="tool-number">02</span><span class="tool-tag">READ ONLY</span></div>
+            <h3>Service status</h3>
+            <p>Check whether a systemd service is active. The script reports its state and never restarts it.</p>
+            <div class="command-block">
+              <span>Example: check nginx</span>
+              <code>bash scripts/service-status.sh nginx</code>
+            </div>
+            <a class="script-link" href="scripts/service-status.sh" target="_blank" rel="noreferrer">Inspect script <span aria-hidden="true">↗</span></a>
+          </article>
+
+          <article class="tool-card tool-card--backup">
+            <div class="card-heading"><span class="tool-number">03</span><span class="tool-tag">DRY RUN FIRST</span></div>
+            <h3>Verified backup</h3>
+            <p>Preview a compressed directory archive, then opt in to create and verify it.</p>
+            <div class="command-block">
+              <span>Preview · no archive is created</span>
+              <code>bash scripts/backup-directory.sh /var/www /backup</code>
+              <span class="execute-label">Create and verify</span>
+              <code>bash scripts/backup-directory.sh /var/www /backup --execute</code>
+            </div>
+            <a class="script-link" href="scripts/backup-directory.sh" target="_blank" rel="noreferrer">Inspect script <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+      </section>
+
+      <section class="quick-start" aria-labelledby="quick-start-heading">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">QUICK START</p>
+            <h2 id="quick-start-heading">Run with confidence</h2>
+          </div>
+          <a class="guide-link" href="https://github.com/charles340/server-automation" target="_blank" rel="noreferrer">Project source <span aria-hidden="true">↗</span></a>
+        </div>
+        <ol class="steps">
+          <li><span>1</span><div><strong>Use a Linux host</strong><p>The tools expect Bash. Service checks require systemd.</p></div></li>
+          <li><span>2</span><div><strong>Read the command first</strong><p>Run a report or service check directly from the project folder.</p></div></li>
+          <li><span>3</span><div><strong>Review backup paths</strong><p>Keep the destination outside the source, then add <code>--execute</code> to create the archive.</p></div></li>
+        </ol>
+      </section>
+
+      <section class="original-scripts" aria-labelledby="original-heading">
+        <div class="original-copy">
+          <p class="eyebrow">CONNECTED TO YOUR EXISTING WORK</p>
+          <h2 id="original-heading">Keep exploring the original toolkit.</h2>
+          <p>This project brings safer, focused entry points into the same server-automation space while keeping the original scripts available for reference.</p>
+        </div>
+        <div class="original-links">
+          <a href="https://github.com/charles340/server-automation/blob/main/bash/monitoring/process-monitor.sh" target="_blank" rel="noreferrer">Process monitor <span aria-hidden="true">↗</span></a>
+          <a href="https://github.com/charles340/server-automation/blob/main/bash/advanced/backup-system.sh" target="_blank" rel="noreferrer">Backup system <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
