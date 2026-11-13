@@ -180,6 +180,22 @@ button {
   grid-column: span 2;
 }
 
+.key--doom {
+  grid-column: 1 / -1;
+  border-color: #6b2a24;
+  background: #4a1f1b;
+  color: #ff8a7a;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.key--doom:hover {
+  border-color: #a8392f;
+  background: #5c2520;
+}
+
 .calculator-footer {
   margin: 16px 0 0;
   color: #92988d;
